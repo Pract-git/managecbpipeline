@@ -1,17 +1,19 @@
 pipeline {
     agent any
-
     stages {
         stage('Hello') {
             steps {
                 echo 'Hello World'
             }
         stage('Again Hello') {
-            echo $PATH
+            steps{
+                echo $PATH
+            }
         }
-
         stage('JAVACHECK') {
-            sh  java
+            steps{
+                sh  java
+            }
         }
         }
     }
