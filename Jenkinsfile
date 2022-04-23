@@ -9,7 +9,6 @@ pipeline {
         stage('Again Hello') {
             echo $PATH
         }
-
         stage('JAVACHECK') {
             sh  java
         }
