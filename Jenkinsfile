@@ -4,7 +4,7 @@ pipeline {
                 stage('Hello') {
                         steps {
                                 echo 'Hello World'
-                                java - version
+                                sh 'java -version'
                         }
                 }
                 stage('Download Git Repo'){
