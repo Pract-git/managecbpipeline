@@ -4,8 +4,30 @@ pipeline {
                 stage('Hello') {
                         steps {
                                 echo 'Hello World'
-                                echo $PATH
-                                sh java - version
+                                java -version
+                        }
+                }
+                stage('Download Git Repo'){
+                        steps {
+                                checkout(
+                changelog: false,
+                poll: false,
+                scm: [
+                    $class: 'GitSCM',
+                    branches: [[name: '*/master']],
+                    extensions:  [
+                        [
+                            $class: 'CleanBeforeCheckout',
+                            deleteUntrackedNestedRepositories: false
+                        ]
+                    ],
+                    gitTool: 'jgit',
+                    userRemoteConfigs: [
+                        [credentialsId: '83b0a1b6-7049-4574-a91f-0bccf35f6c5e',
+                        url: 'https://github.com/Pract-git/managecbpipeline.git']
+                    ]
+                ]
+            )
                         }
                 }
         }
