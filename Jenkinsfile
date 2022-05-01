@@ -7,7 +7,7 @@ pipeline {
                                 sh 'java -version'
                         }
                 }
-                stage('Download Git Repo'){
+                stage('Download Git Repo') {
                         steps {
                                 checkout(
                 changelog: false,
@@ -21,8 +21,11 @@ pipeline {
                             deleteUntrackedNestedRepositories: false
                         ]
                     ],
-                    git [credentialsId: '83b0a1b6-7049-4574-a91f-0bccf35f6c5e',
+                    gitTool: 'git-tool',
+                    userRemoteConfigs: [
+                        [credentialsId: '83b0a1b6-7049-4574-a91f-0bccf35f6c5e',
                     url: 'https://github.com/Pract-git/managecbpipeline']
+                    ]
                 ]
             )
                         }
