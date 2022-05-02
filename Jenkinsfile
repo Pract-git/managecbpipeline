@@ -14,7 +14,7 @@ pipeline {
                 poll: false,
                 scm: [
                     $class: 'GitSCM',
-                    branches: [[name: '*/master']],
+                    branches: [[name: '*/main']],
                     extensions:  [
                         [
                             $class: 'CleanBeforeCheckout',
@@ -25,7 +25,7 @@ pipeline {
                             relativeTargetDir: 'manage-cb'
                         ],
                     ],
-                    gitTool: 'git-tool',
+                    gitTool: 'git',
                     userRemoteConfigs: [
                         [credentialsId: '83b0a1b6-7049-4574-a91f-0bccf35f6c5e',
                     url: 'https://github.com/Pract-git/managecbpipeline.git']
