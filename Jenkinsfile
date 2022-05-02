@@ -35,11 +35,11 @@ pipeline {
                         }
                 }
                 stage('install hub'){
-                        wget https://github.com/github/hub/releases/download/v2.14.2/hub-linux-amd64-2.14.2.tgz
-                        gunzip hub-linux-amd64-2.14.2.tgz
-                        tar -xvf hub-linux-amd64-2.14.2.tar
-                        cd hub-linux-amd64-2.14.2/
-                        sh install
+                       sh 'wget https://github.com/github/hub/releases/download/v2.14.2/hub-linux-amd64-2.14.2.tgz'
+                       sh 'gunzip hub-linux-amd64-2.14.2.tgz'
+                       sh 'tar -xvf hub-linux-amd64-2.14.2.tar'
+                       sh 'cd hub-linux-amd64-2.14.2/'
+                       sh install
                 }
         }
         post {
