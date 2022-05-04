@@ -34,16 +34,34 @@ pipeline {
             )
                         }
                 }
-                stage('install hub') {
+                stage('Invoke Manage Content Bucket') {
                         steps {
-                       sh 'wget https://github.com/github/hub/releases/download/v2.14.2/hub-linux-amd64-2.14.2.tgz'
-                       sh 'gunzip hub-linux-amd64-2.14.2.tgz'
-                       sh 'tar -xvf hub-linux-amd64-2.14.2.tar'
-                       sh 'cd hub-linux-amd64-2.14.2/'
-                       sh 'install'
+
+                                sh '''#!/bin/bash
+                                set -ex
+                                function run {
+                                local will_deploy
+                                local -a args=()
+                                if [[ "$Create_Content_Bucket" = "true" ]]  ; then
+                                        args+=("--create-content-bucket");
+                                fi
+                                if [[ "${#args[@]}" -gt 0 ]] ; then
+                                        args+=("--coe-repo"); args+=("$repo");
+                                        args+=("--role-arn"); args+=("$role");
+
+                                        bash -e manage-content-bucket.sh "${args[@]}"
+                                else
+                                        echo "No images were selected."
+                                        exit 1
+                                fi
+                                }
+
+                                run "$@"
+                                '''
                         }
                 }
         }
+}
         post {
                 always {
                         echo 'This will always run'
