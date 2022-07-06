@@ -8,8 +8,8 @@ pipeline {
                         set -ex
 
                         function run {
-                        "echo $Aws_Account"
-                        "echo $Aws_Region"
+                        bash -e echo "$Aws_Account"
+                        bash -e echo "$Aws_Region"
                         local -r repo="$coe_account.dkr.ecr.us-east-2.amazonaws.com"
                         local -r role="arn:aws:iam::$coe_account:role/allow-ig-build-service-access-from-other-accounts"
                         #local -r ART_REPO="idgov-docker.svsartifactory.swinfra.net/idmapps"
